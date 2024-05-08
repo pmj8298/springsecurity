@@ -27,16 +27,18 @@ public class WebSecurityConfig {
     public WebSecurityCustomizer configure() {
         return (web) -> web.ignoring()
               //  .requestMatchers(toH2Console())    // /h2-console
+        	  // /static/** -> *가 모든 것인데 **은 그 하위에 있는 모든 것
                 .requestMatchers("/static/**");    // /static/**   : .html, .js, .css
     }
 
     // 2.특정 HTTP 요청에 대한 웹 기반 보안 구성 // spring security 6.1.0 
+    // form login 기법 - 간단히 처리 가능
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     	
     	http
 		  .csrf((csrfConfig) -> csrfConfig.disable()
-		)  // csrf 비활성 -> 실무는 활성화 필요
+		)  // csrf 해킹을 방지하는 기능을 비활성 -> 실무는 활성화 필요
 		 // authorizeHttpRequests() 로 변경됨: security 6.1.0  
 		.authorizeHttpRequests((auth) -> auth
 	//					.requestMatchers(PathRequest.toH2Console())
@@ -44,7 +46,7 @@ public class WebSecurityConfig {
 						.anyRequest().authenticated() // 나머지 요청은 인증 필요
 		)  // "/login", "/signup", "user" 는 요청인가 없이 접근허용
 		.formLogin((formLogin) -> formLogin
-						.loginPage("/login")	   // 로그인 페이지 경로	
+						.loginPage("/login")	   // 로그인 페이지 경로	-> UserViewController로 이동
 						.failureHandler(customFailureHandler) // 새로 추가됨
 						.defaultSuccessUrl("/")    // 로그인 성공시 경로
 		) // 로그인처리
@@ -59,6 +61,7 @@ public class WebSecurityConfig {
     // 7) 인증관리자 관련 설정 : 사용자 정보를 가져올 서비스 재정의하거나 
     //    인증방법(LDAP, JDBC 기반) 설정 
 
+    // @Bean : 자동으로 불려올 class들
     @Bean
     public AuthenticationManager authenticationManager(
     	 HttpSecurity http, 

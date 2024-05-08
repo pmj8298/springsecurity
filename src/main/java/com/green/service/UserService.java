@@ -20,6 +20,7 @@ public class UserService {
         return userRepository.save(User.builder()
                 .email(dto.getEmail())
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
-                .build()).getId();
+                .build())
+        		.getId(); // Dto 안에 있는 data 를 저장하고 저장된 id 를 return
     }
 }

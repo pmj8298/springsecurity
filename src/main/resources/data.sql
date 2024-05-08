@@ -23,5 +23,7 @@ INSERT INTO comments(id,article_id, nickname, body) VALUES(comments_seq.nextval,
 INSERT INTO comments(id,article_id, nickname, body) VALUES(comments_seq.nextval, 6, 'Kim', '유튜브 시청');
 INSERT INTO comments(id,article_id, nickname, body) VALUES(comments_seq.nextval, 6, 'Choi', '독서');
 
--- 회원정보 추가(email:'aaa@aaa.com', password:'aaa')
+-- 회원정보 추가: identity (email:'aaa@aaa.com', password:'aaa')
+---- 기존 회원가입과 로그인이 되면 세션이 살아있어서 자동로그인 된다
+---- 그러므로 로그아웃(http://localhost:9090/logout)한 후 다시 로그인해야한다
 INSERT INTO USERSJPA(email,password) VALUES('aaa@aaa.com','$2a$10$wCBX9ghQ2Dq5Vyk0Fl3/W.qUzoTG2tO7nECb0N.eigTe11.EcJhMq');

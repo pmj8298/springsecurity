@@ -39,7 +39,7 @@ dependencies {
     //sql로그 (? 안의 내용 출력)
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
     
-    // thymeleaf 추가
+    // thymeleaf 추가(.html)
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     
     // 1. spring security 추가

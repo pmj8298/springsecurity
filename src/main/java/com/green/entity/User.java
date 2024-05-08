@@ -47,6 +47,7 @@ public class User implements UserDetails { // UserDetails 을 상속받아 인�
         this.password = password;
     }
 
+    //---------------------------------------
     @Override     // 권한 반환
     public Collection<? extends GrantedAuthority> getAuthorities() {
     	// 사용자가 가지고 있는 권한의 목록을 반환, 현재  user 권한만 반환
